@@ -10,7 +10,7 @@ resource "aws_launch_configuration" "launch_config" {
   key_name                    = "${var.key_name}"
   security_groups             = ["${aws_security_group.suchapp.id}"]
   user_data                   = "${file("user_data.sh")}"
-  associate_public_ip_address = false
+  associate_public_ip_address = "${var.assign_public_ip}"
 }
 
 resource "aws_autoscaling_group" "asg" {

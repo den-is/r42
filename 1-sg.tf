@@ -34,6 +34,14 @@ resource "aws_security_group" "suchapp" {
     description = "Allow admin direct access on service port"
   }
 
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "TCP"
+    cidr_blocks = ["${var.pubip}"]
+    description = "Allow some public IP direct access on service port"
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -59,6 +67,14 @@ resource "aws_security_group" "suchapp_elb" {
     protocol    = "TCP"
     cidr_blocks = ["${var.myip}"]
     description = "Allow admin direct access on service port"
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "TCP"
+    cidr_blocks = ["${var.pubip}"]
+    description = "Allow some public IP direct access on service port"
   }
 
   egress {
