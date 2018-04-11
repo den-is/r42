@@ -4,7 +4,7 @@ data "aws_subnet_ids" "subnets" {
 
 resource "aws_launch_configuration" "launch_config" {
   name                        = "suchapp"
-  image_id                    = "ami-6283ef0d"
+  image_id                    = "${lookup(var.ubuntu_ami_id, var.region)}"
   instance_type               = "t2.micro"
   iam_instance_profile        = "${aws_iam_instance_profile.suchapp.arn}"
   key_name                    = "${var.key_name}"
